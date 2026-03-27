@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import path from "path";
 
 import authRoutes from "./routes/auth.route.js";
@@ -21,6 +22,11 @@ const __dirname = path.resolve();
 
 app.use(express.json({ limit: "10mb" })); // allows you to parse the body of the request
 app.use(cookieParser());
+
+app.use(cors({
+	origin: "https://e-commerce-platform-xi-fawn.vercel.app",
+	credentials: true
+}));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
