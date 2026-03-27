@@ -1,7 +1,14 @@
 import axios from "axios";
 
+const getBaseURL = () => {
+	if (import.meta.env.MODE === "development") {
+		return "http://localhost:5000/api";
+	}
+	return import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : "/api";
+};
+
 const axiosInstance = axios.create({
-	baseURL: import.meta.mode === "development" ? "http://localhost:5000/api" : "https://e-commerce-platform-fqje.onrender.com/api",
+	baseURL: getBaseURL(),
 	withCredentials: true, // send cookies to the server
 });
 
